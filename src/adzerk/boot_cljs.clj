@@ -48,8 +48,8 @@
   "Given a per-compile base context, applies middleware to obtain the final,
   compiler-ready context for this build."
   [{:keys [tmp-src tmp-out main files opts] :as ctx}]
+  (core/empty-dir! tmp-src)
   (util/delete-plain-files! tmp-out)
-  (util/delete-plain-files! tmp-src)
   (->> ctx wrap/main wrap/level wrap/shim wrap/externs wrap/source-map))
 
 (defn- compile
